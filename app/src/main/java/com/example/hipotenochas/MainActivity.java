@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    int nivel=0;
+   int nivel=0;
+    //Niveles nivel = new Niveles();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         if (nivel==0){
-            addButtons(8);
+            iniciarPartida(10);
             Recorrer();
         }
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Añadir botones
-    public void addButtons(int filas){
+    public void iniciarPartida(int filas){
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
         Button boton;
 
@@ -42,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (int i = 0; i < casillas; i++) {
                 boton = new Button(this);
                 boton.setLayoutParams(new ViewGroup.LayoutParams(
-                        gridLayout.getLayoutParams().width/filas,
+                       gridLayout.getLayoutParams().width/filas,
                         gridLayout.getLayoutParams().height/filas));
-               //boton.setBackgroundColor(38);
+
                 boton.setId(View.generateViewId());
              //   boton.setBackgroundColor();
                 boton.setOnClickListener(this);
