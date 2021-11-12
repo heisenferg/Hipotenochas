@@ -135,23 +135,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
 
         switch (id){
-            case R.id.BuscarCliente:
+            case R.id.personajes:
                 Toast.makeText(getApplicationContext(), "Se ha pulsado Buscar cliente...", Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.Clientes:
+            case R.id.instrucciones:
                 Toast.makeText(getApplicationContext(), "Se ha pulsado en Cliente",
                         Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.Facturas:
+            case R.id.comenzarJuego:
+                Toast.makeText(getApplicationContext(), "Se ha pulsado en Cliente",
+                        Toast.LENGTH_LONG).show();
+            case R.id.configurar:
                 Toast.makeText(getApplicationContext(), "Se ha pulsado en facturas",
                         Toast.LENGTH_LONG).show();
-            case R.id.ajustes:
-            case R.id.confClientes:
-            case R.id.confFacturas:
-            case R.id.NuevaFactura:
-            case R.id.NuevoCliente:
-                Toast.makeText(getApplicationContext(), "Otro botón fue pulsado",
-                        Toast.LENGTH_LONG).show();
+
                 return true;
         }
 

@@ -6,48 +6,25 @@
     android:layout_width="wrap_content"
     tools:context=".MainActivity" >
 
-    <item android:id="@+id/ajustes"
-        android:title="Ajustes"
+    <item android:id="@+id/personajes"
+        android:title="Cambio de personaje"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/icono"
         app:showAsAction="ifRoom">
-        <menu> <!--Submenú-->
-            <item android:id="@+id/confFacturas"
-                android:title="Configuración de facturas"
-                android:orderInCategory="1"/>
-            <item android:id="@+id/confPedidos"
-                android:title="Configuración de Pedidos"
-                android:orderInCategory="2"/>
-            <item android:id="@+id/confClientes"
-                android:title="Configuración de Clientes"
-                android:orderInCategory="3"/>
-        </menu>
     </item>
 
-    <item android:id="@+id/Clientes"
-        android:title="Clientes"
+    <item android:id="@+id/instrucciones"
+        android:title="Instrucciones"
         android:orderInCategory="2">
-        <menu>
-            <item android:id="@+id/NuevoCliente"
-                android:title="Nuevo Cliente"
-                android:orderInCategory="1"/>
-            <item android:id="@+id/BuscarCliente"
-                android:title="Buscar cliente"
-                android:orderInCategory="2"/>
-        </menu>
     </item>
 
-
-    <item android:id="@+id/Facturas"
-        android:title="Facturas"
+    <item android:id="@+id/comenzarJuego"
+        android:title="Comenzar juego"
         android:orderInCategory="3">
-        <menu>
-            <item android:id="@+id/NuevaFactura"
-                android:title="Nueva Factura"
-                android:orderInCategory="1" />
-            <item android:id="@+id/BuscarFactura"
-                android:title="Buscar Factura"
-                android:orderInCategory="2" />
-        </menu>
+    </item>
+
+    <item android:id="@+id/configurar"
+        android:title="Configurar"
+        android:orderInCategory="4">
     </item>
 </menu>
