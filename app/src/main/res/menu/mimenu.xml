@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    tools:context=".MainActivity" >
+
+    <item android:id="@+id/ajustes"
+        android:title="Ajustes"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_launcher_background"
+        app:showAsAction="ifRoom">
+        <menu> <!--Submenú-->
+            <item android:id="@+id/confFacturas"
+                android:title="Configuración de facturas"
+                android:orderInCategory="1"/>
+            <item android:id="@+id/confPedidos"
+                android:title="Configuración de Pedidos"
+                android:orderInCategory="2"/>
+            <item android:id="@+id/confClientes"
+                android:title="Configuración de Clientes"
+                android:orderInCategory="3"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/Clientes"
+        android:title="Clientes"
+        android:orderInCategory="1">
+        <menu>
+            <item android:id="@+id/NuevoCliente"
+                android:title="Nuevo Cliente"
+                android:orderInCategory="1"/>
+            <item android:id="@+id/BuscarCliente"
+                android:title="Buscar cliente"
+                android:orderInCategory="2"/>
+        </menu>
+    </item>
+
+
+    <item android:id="@+id/Facturas"
+        android:title="Facturas"
+        android:orderInCategory="2">
+        <menu>
+            <item android:id="@+id/NuevaFactura"
+                android:title="Nueva Factura"
+                android:orderInCategory="1" />
+            <item android:id="@+id/BuscarFactura"
+                android:title="Buscar Factura"
+                android:orderInCategory="2" />
+        </menu>
+    </item>
+</menu>
