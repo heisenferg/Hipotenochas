@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         if (nivel==0){
-            addButtons(64);
+            addButtons(8);
             Recorrer();
         }
 
@@ -31,15 +31,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Añadir botones
-    public void addButtons(int c){
+    public void addButtons(int filas){
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
         Button boton;
 
-            for (int i = 0; i < c; i++) {
+        gridLayout.setRowCount(filas);
+        gridLayout.setColumnCount(filas);
+
+            for (int i = 0; i < filas*filas; i++) {
                 boton = new Button(this);
                 boton.setLayoutParams(new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                        gridLayout.getLayoutParams().width/filas,
+                        gridLayout.getLayoutParams().height/filas));
                //boton.setBackgroundColor(38);
                 boton.setId(View.generateViewId());
              //   boton.setBackgroundColor();
