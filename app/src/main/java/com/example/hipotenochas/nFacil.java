@@ -6,6 +6,7 @@ public class nFacil extends Niveles{
         return nFacil.FILAS;
     }
 
+
     @Override
     public int getHipotenochas() {
         return nFacil.HIPOTENOCHAS;

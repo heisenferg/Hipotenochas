@@ -15,16 +15,22 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-   int nivel=0;
-    //Niveles nivel = new Niveles();
+   Niveles nivel = new nDificil();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (nivel==0){
-            iniciarPartida(10);
+        if (nivel.getNivel()==0){
+            iniciarPartida(new nFacil());
+            Recorrer();
+        } else if (nivel.getNivel()==1){
+            iniciarPartida(new nMedio());
+            Recorrer();
+        } else if (nivel.getNivel()==2){
+            iniciarPartida(new nDificil());
             Recorrer();
         }
 
@@ -32,19 +38,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Añadir botones
-    public void iniciarPartida(int filas){
+    public void iniciarPartida(Niveles nivel){
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
         Button boton;
 
-        gridLayout.setRowCount(filas);
-        gridLayout.setColumnCount(filas);
-        int casillas = filas*filas;
+        gridLayout.setRowCount(nivel.getFilas());
+        gridLayout.setColumnCount(nivel.getFilas());
+        int casillas = nivel.getFilas()* nivel.getFilas();
 
             for (int i = 0; i < casillas; i++) {
                 boton = new Button(this);
                 boton.setLayoutParams(new ViewGroup.LayoutParams(
-                       gridLayout.getLayoutParams().width/filas,
-                        gridLayout.getLayoutParams().height/filas));
+                       gridLayout.getLayoutParams().width/nivel.getFilas(),
+                        gridLayout.getLayoutParams().height/nivel.getFilas()));
 
                 boton.setId(View.generateViewId());
              //   boton.setBackgroundColor();
