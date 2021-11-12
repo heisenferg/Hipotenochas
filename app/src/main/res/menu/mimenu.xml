@@ -26,7 +26,7 @@
 
     <item android:id="@+id/Clientes"
         android:title="Clientes"
-        android:orderInCategory="1">
+        android:orderInCategory="2">
         <menu>
             <item android:id="@+id/NuevoCliente"
                 android:title="Nuevo Cliente"
@@ -40,7 +40,7 @@
 
     <item android:id="@+id/Facturas"
         android:title="Facturas"
-        android:orderInCategory="2">
+        android:orderInCategory="3">
         <menu>
             <item android:id="@+id/NuevaFactura"
                 android:title="Nueva Factura"

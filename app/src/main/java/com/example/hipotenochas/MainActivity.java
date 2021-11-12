@@ -2,7 +2,9 @@ package com.example.hipotenochas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-   Niveles nivel = new nDificil();
+    public static final int HIPOTENOCHA=-1;
+    public static final int NOHIPOTENOCHA=0;
+   Niveles nivel = new nFacil();
+   private int [][] celda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Añadir botones
     public void iniciarPartida(Niveles nivel){
+
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
         Button boton;
 
@@ -45,16 +51,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gridLayout.setColumnCount(nivel.getFilas());
         int casillas = nivel.getFilas()* nivel.getFilas();
 
+        celda = new int [nivel.getFilas()][nivel.getFilas()];
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
+        param.setMargins(0, 0, 0, 10);
+
             for (int i = 0; i < casillas; i++) {
                 boton = new Button(this);
                 boton.setLayoutParams(new ViewGroup.LayoutParams(
-                       gridLayout.getLayoutParams().width/nivel.getFilas(),
+                         gridLayout.getLayoutParams().width/nivel.getFilas(),
                         gridLayout.getLayoutParams().height/nivel.getFilas()));
 
                 boton.setId(View.generateViewId());
-             //   boton.setBackgroundColor();
                 boton.setOnClickListener(this);
-
                 gridLayout.addView(boton,i);
             }
 
@@ -70,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v= gridLayout.getChildAt(i);
             if (v.getClass().getSimpleName().equals("Button")) {
                 boton = (Button) v;
-               // boton.setBackgroundColor(Color.rgb(255,0,0));
+               boton.setBackgroundColor(Color.rgb(255,0,0));
             }
         }
     }
@@ -79,10 +94,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getClass().getSimpleName().equals("Button")){
-            ImageButton boton = (ImageButton) v;
+            Button boton = (Button) v;
+            boton.setBackgroundColor(Color.rgb(0,255,0));
             accion(boton);
         }
     }
+
+
+    //Selección nivel
 
 
 
@@ -142,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public void accion(ImageButton boton){
+    public void accion(Button boton){
 
     }
 }
