@@ -9,7 +9,7 @@
     <item android:id="@+id/personajes"
         android:title="Cambio de personaje"
         android:orderInCategory="100"
-        android:icon="@drawable/icono"
+        android:icon="@drawable/gato"
         app:showAsAction="ifRoom">
     </item>
 
