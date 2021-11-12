@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         gridLayout.setRowCount(filas);
         gridLayout.setColumnCount(filas);
+        int casillas = filas*filas;
 
-            for (int i = 0; i < filas*filas; i++) {
+            for (int i = 0; i < casillas; i++) {
                 boton = new Button(this);
                 boton.setLayoutParams(new ViewGroup.LayoutParams(
                         gridLayout.getLayoutParams().width/filas,
