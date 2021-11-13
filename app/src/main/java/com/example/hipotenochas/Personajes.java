@@ -13,6 +13,11 @@ public class Personajes {
     private String nombre;
     private Drawable imagenes;
 
+    public Personajes(String nombre, Drawable imagenes) {
+        setNombre(nombre);
+        setImagenes(imagenes);
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -30,10 +35,7 @@ public class Personajes {
         this.imagenes = imagenes;
     }
 
-    public Personajes(String nombre, Drawable imagenes) {
-        setNombre(nombre);
-        setImagenes(imagenes);
-    }
+
 
 
 }

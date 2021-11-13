@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1010dp"
-        android:id="@+id/gatoPersonaje"
+        android:id="@+id/ImagengatoPersonaje"
         android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
        app:srcCompat="@drawable/gato"
@@ -19,6 +19,7 @@
 
     <TextView
         android:layout_width="100dp"
+        android:id="@+id/nombrePersonaje"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:gravity="center"

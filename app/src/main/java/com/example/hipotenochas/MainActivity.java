@@ -1,10 +1,7 @@
 package com.example.hipotenochas;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.app.Dialog;
-import android.app.Person;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -14,17 +11,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TableLayout;
+
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -72,11 +68,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Añadir botones
     public void iniciarPartida(Niveles nivel){
 
-        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
+        GridLayout gridLayout =  (GridLayout) findViewById(R.id.gridLay);
+        RelativeLayout r = (RelativeLayout) findViewById(R.id.layout_principal);
         Button boton;
 
         gridLayout.setRowCount(nivel.getFilas());
         gridLayout.setColumnCount(nivel.getFilas());
+
         int casillas = nivel.getFilas()* nivel.getFilas();
 
         celda = new int [nivel.getFilas()][nivel.getFilas()];
@@ -88,32 +86,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int height = size.y;
 
         GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-        param.setMargins(0, 0, 0, 10);
+        param.setMargins(0, 0, 0, 0);
 
-            for (int i = 0; i < casillas; i++) {
-                boton = new Button(this);
-                boton.setLayoutParams(new ViewGroup.LayoutParams(
-                         gridLayout.getLayoutParams().width/nivel.getFilas(),
-                        gridLayout.getLayoutParams().height/nivel.getFilas()));
+        for (int i = 0; i < casillas; i++) {
+            boton = new Button(this);
+            boton.setLayoutParams(new ViewGroup.LayoutParams(
+                    gridLayout.getLayoutParams().width/nivel.getFilas(),
+                    gridLayout.getLayoutParams().height/nivel.getFilas()));
 
-                boton.setId(View.generateViewId());
-                boton.setOnClickListener(this);
-                gridLayout.addView(boton,i);
-            }
+            boton.setId(View.generateViewId());
+            boton.setOnClickListener(this);
+            gridLayout.addView(boton,i);
+        }
 
 
     }
 
     public void Recorrer(){
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
-       Button boton;
+        Button boton;
 
         for (int i=0; i< gridLayout.getChildCount(); i++){
             View v;
             v= gridLayout.getChildAt(i);
             if (v.getClass().getSimpleName().equals("Button")) {
                 boton = (Button) v;
-               boton.setBackgroundColor(Color.rgb(255,0,0));
+                boton.setBackgroundColor(Color.rgb(255,0,0));
             }
         }
     }
@@ -129,9 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //Desde aquí
-
-
 
 
  public void cambiarGato(){
@@ -140,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         personaje.setTitle("Personaje gatuno");
         Spinner spin = personaje.findViewById(R.id.spin_gatos);
         AdaptadorPersonalizado adaptadorPersonalizado = new AdaptadorPersonalizado(this, personajesArray);
-        spin.setAdapter((SpinnerAdapter) adaptadorPersonalizado);
+        spin.setAdapter(adaptadorPersonalizado);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -151,7 +146,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> parent) {
                 personaje.dismiss();
             }
+
         });
+     personaje.show();
  }
 
 
