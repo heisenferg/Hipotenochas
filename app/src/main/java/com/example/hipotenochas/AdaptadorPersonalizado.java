@@ -60,7 +60,7 @@ public class AdaptadorPersonalizado extends BaseAdapter {
             item = inflater.inflate(R.layout.spinnerpersonajes, null);
         }
 
-        TextView nombre = item.findViewById(R.id.personajes);
+        TextView nombre = item.findViewById(R.id.seleccion);
         nombre.setText(personajes.get(i).getNombre());
 
         ImageView imagen = item.findViewById(R.id.gatoPersonaje);

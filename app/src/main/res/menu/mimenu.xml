@@ -6,15 +6,15 @@
     android:layout_width="wrap_content"
     tools:context=".MainActivity" >
 
-    <item android:id="@+id/personajes"
-        android:title="Cambio de personaje"
+    <item android:id="@+id/seleccion"
+        android:title="@string/Cambio_de_personaje"
         android:orderInCategory="100"
         android:icon="@drawable/gato"
         app:showAsAction="ifRoom">
     </item>
 
     <item android:id="@+id/instrucciones"
-        android:title="Instrucciones"
+        android:title="@string/Instrucciones"
         android:orderInCategory="2">
     </item>
 

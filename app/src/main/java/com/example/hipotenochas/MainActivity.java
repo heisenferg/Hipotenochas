@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
 
         switch (id){
-            case R.id.personajes:
+            case R.id.seleccion:
                 cambiarGato();
                 //Toast.makeText(getApplicationContext(), "Cambiando personaje...", Toast.LENGTH_LONG).show();
 
