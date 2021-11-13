@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    private int [][] celda;
    private final ArrayList<Personajes> personajesArray = new ArrayList<>();
    private Personajes personajeElegido;
+    Niveles nivel = new nFacil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +52,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         personajesArray.add(gato3);
         personajeElegido=gato1;
 
-        Niveles nivel = new nFacil();
 
 
         if (nivel.getNivel()==0){
             iniciarPartida(new nFacil());
-            Recorrer();
+         //   Recorrer();
         } else if (nivel.getNivel()==1){
             iniciarPartida(new nMedio());
-            Recorrer();
+          //  Recorrer();
         } else if (nivel.getNivel()==2){
             iniciarPartida(new nDificil());
-            Recorrer();
+          //  Recorrer();
         }
 
 
@@ -102,9 +102,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             gridLayout.addView(boton,i);
         }
 
+        for (int i=0; i< gridLayout.getChildCount(); i++){
+            View v;
+            v= gridLayout.getChildAt(i);
+            if (v.getClass().getSimpleName().equals("Button")) {
+                boton = (Button) v;
+                boton.setBackgroundColor(Color.rgb(255,0,0));
+            }
+        }
 
     }
-
+/*
     public void Recorrer(){
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
         Button boton;
@@ -118,21 +126,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
+*/
     //Respuesta
     @Override
     public void onClick(View v) {
         if (v.getClass().getSimpleName().equals("Button")){
             Button boton = (Button) v;
             boton.setBackgroundColor(Color.rgb(0,255,0));
-            accion(boton);
+
         }
     }
 
 
 
 
- public void cambiarGato(){
+    public void cambiarGato(){
         Dialog personaje = new Dialog(this);
         personaje.setContentView(R.layout.spinnerpersonajes);
         personaje.setTitle("Personaje gatuno");
@@ -151,26 +159,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         });
-     personaje.show();
- }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        personaje.show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
@@ -185,17 +175,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.seleccion:
                 cambiarGato();
-                //Toast.makeText(getApplicationContext(), "Cambiando personaje...", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.cambioPersonaje, Toast.LENGTH_LONG).show();
                 return true;
             case R.id.instrucciones:
-
                 instrucciones();
                 return true;
             case R.id.comenzarJuego:
-                Toast.makeText(getApplicationContext(), "Se ha pulsado en Cliente",
+                Toast.makeText(getApplicationContext(), R.string.toastcomenzar,
                         Toast.LENGTH_LONG).show();
+                iniciarPartida(nivel);
+                return true;
+                //Recorrer();
             case R.id.configurar:
-                Toast.makeText(getApplicationContext(), "Se ha pulsado en facturas",
+                Toast.makeText(getApplicationContext(), R.string.confi,
                         Toast.LENGTH_LONG).show();
 
                 return true;
@@ -222,7 +214,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public void accion(Button boton){
-
-    }
 }

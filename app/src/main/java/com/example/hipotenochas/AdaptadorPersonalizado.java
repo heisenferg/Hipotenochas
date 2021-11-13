@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
 public class AdaptadorPersonalizado extends BaseAdapter {
     private ArrayList<Personajes> personajes;
     private Context context;

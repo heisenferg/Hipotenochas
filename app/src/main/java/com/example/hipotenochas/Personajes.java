@@ -1,3 +1,4 @@
+
 package com.example.hipotenochas;
 
 
@@ -7,8 +8,6 @@ import android.graphics.drawable.Drawable;
 
 
 public class Personajes {
-
-
 
     private String nombre;
     private Drawable imagenes;
@@ -36,8 +35,4 @@ public class Personajes {
     }
 
 
-
-
 }
-
-

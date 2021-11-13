@@ -4,8 +4,10 @@
     <string name="Instrucciones">Instrucciones</string>
     <string name="Comenzar_juego">Comenzar juego</string>
     <string name="Configurar">Configurar</string>
-    <string name="textInstruc">CONDICIÓN DE VICTORIA: El usuario gana cuando ha ocurrido la situación 2 y ha marcado
-correctamente todas las hipotenochas.
-CONDICIÓN DE DERROTA: El usuario pierde cuando ha ocurrido la situación 1 y ha marcado
-correctamente todas las hipotenochas.</string>
+    <string name="textInstruc">CONDICIÓN DE VICTORIA: El usuario gana cuando ha despejado todo el tablero y ha marcado
+correctamente todas las hipotenochas.\nCONDICIÓN DE DERROTA: El usuario pierde cuando ha ocurrido no ha marcado
+correctamente todas las hipotenochas o pulsa sobre una.</string>
+    <string name="toastcomenzar">Comenzando juego...</string>
+    <string name="cambioPersonaje">Cambiando personaje...</string>
+    <string name="confi">Configuración de dificultad</string>
 </resources>
