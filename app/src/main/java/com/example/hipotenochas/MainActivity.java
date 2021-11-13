@@ -1,6 +1,9 @@
 package com.example.hipotenochas;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
+import android.app.Person;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -9,11 +12,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,11 +31,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int NOHIPOTENOCHA=0;
    Niveles nivel = new nFacil();
    private int [][] celda;
+   private final ArrayList<Personajes> personajesArray = new ArrayList<>();
+   private Personajes personajeElegido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Desde aquí
+
+        Personajes personaje = new Personajes();
+
+        Spinner listaSpinner = (Spinner) findViewById(R.id.personajes);
+        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Collections.singletonList(personaje.getNombre()));
+        adaptador.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+
+        listaSpinner.setAdapter(adaptador);
+        listaSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+
+
+      /Hasta aquí*/
+
+
 
         if (nivel.getNivel()==0){
             iniciarPartida(new nFacil());
@@ -101,10 +131,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //Selección nivel
+    //Desde aquí
 
 
 
+
+ public void cambiarGato(){
+        Dialog personaje = new Dialog(this);
+        personaje.setContentView(R.layout.spinnerpersonajes);
+        personaje.setTitle("Personaje gatuno");
+        Spinner spin = personaje.findViewById(R.id.spin_gatos);
+        AdaptadorPersonalizado adaptadorPersonalizado = new AdaptadorPersonalizado(this, personajesArray);
+        spin.setAdapter((SpinnerAdapter) adaptadorPersonalizado);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                personajeElegido = personajesArray.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+ }
 
 
 
@@ -136,7 +186,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (id){
             case R.id.personajes:
-                Toast.makeText(getApplicationContext(), "Se ha pulsado Buscar cliente...", Toast.LENGTH_LONG).show();
+                cambiarGato();
+                Toast.makeText(getApplicationContext(), "Cambiando personaje...", Toast.LENGTH_LONG).show();
+
                 return true;
             case R.id.instrucciones:
                 Toast.makeText(getApplicationContext(), "Se ha pulsado en Cliente",

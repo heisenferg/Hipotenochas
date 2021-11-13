@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
 xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Gato pensativo"
         android:id="@+id/nombreGato"
+        android:gravity="center"
+        android:textSize="50px"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ImageView
-        android:id="@+id/fotoGato"
+    <Spinner
+        android:id="@+id/spin_gatos"
         android:layout_width="152dp"
         android:layout_height="82dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="295dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:pointerIcon="@drawable/gato"
-        android:src="@drawable/gato" />
+        />
 </RelativeLayout>
