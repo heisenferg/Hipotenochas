@@ -19,12 +19,12 @@
     </item>
 
     <item android:id="@+id/comenzarJuego"
-        android:title="Comenzar juego"
+        android:title="@string/Comenzar_juego"
         android:orderInCategory="3">
     </item>
 
     <item android:id="@+id/configurar"
-        android:title="Configurar"
+        android:title="@string/Configurar"
         android:orderInCategory="4">
     </item>
 </menu>

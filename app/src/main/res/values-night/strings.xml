@@ -2,4 +2,5 @@
 <resources>
     <string name="Cambio_de_personaje">Cambio de personaje</string>
     <string name="Instrucciones">Instrucciones</string>
+    <string name="Configurar">Configurar</string>
 </resources>

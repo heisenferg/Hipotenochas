@@ -7,18 +7,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Gato pensativo"
+        android:text="Gato"
         android:id="@+id/nombreGato"
         android:gravity="center"
         android:textSize="50px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textAllCaps="true"
+        />
 
     <Spinner
         android:id="@+id/spin_gatos"
         android:layout_width="match_parent"
-        android:layout_height="82dp"
+        android:layout_height="120dp"
         />
 </RelativeLayout>

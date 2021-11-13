@@ -2,4 +2,6 @@
     <string name="app_name">Hipotenochas</string>
     <string name="Cambio_de_personaje">Cambio de personaje</string>
     <string name="Instrucciones">Instrucciones</string>
+    <string name="Comenzar_juego">Comenzar juego</string>
+    <string name="Configurar">Configurar</string>
 </resources>
