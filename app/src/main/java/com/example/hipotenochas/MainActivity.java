@@ -1,7 +1,10 @@
 package com.example.hipotenochas;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -178,16 +181,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-
+        Instrucciones instrucciones = new Instrucciones();
         switch (id){
             case R.id.seleccion:
                 cambiarGato();
                 //Toast.makeText(getApplicationContext(), "Cambiando personaje...", Toast.LENGTH_LONG).show();
-
                 return true;
             case R.id.instrucciones:
-                Toast.makeText(getApplicationContext(), "Se ha pulsado en Cliente",
-                        Toast.LENGTH_LONG).show();
+
+                instrucciones();
                 return true;
             case R.id.comenzarJuego:
                 Toast.makeText(getApplicationContext(), "Se ha pulsado en Cliente",
@@ -201,6 +203,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void instrucciones() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Instrucciones");
+        builder.setMessage(R.string.textInstruc);
+        builder.setNegativeButton("Cerrar instrucciones", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
