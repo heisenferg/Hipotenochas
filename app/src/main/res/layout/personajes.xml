@@ -8,12 +8,11 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1010dp"
+        android:layout_height="100dp"
         android:id="@+id/ImagengatoPersonaje"
         android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-       app:srcCompat="@drawable/gato"
-        />
+       app:srcCompat="@drawable/gato" />
 
 
 
@@ -24,6 +23,5 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:text="TextView"/>
-
 
 </LinearLayout>

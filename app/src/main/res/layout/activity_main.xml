@@ -9,12 +9,14 @@
 
     <GridLayout
         android:id="@+id/gridLay"
-        android:layout_width="400dp"
+        android:layout_width="410dp"
         android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.586"></GridLayout>
+        app:layout_constraintVertical_bias="0.586" >
+
+    </GridLayout>
 
 </RelativeLayout>

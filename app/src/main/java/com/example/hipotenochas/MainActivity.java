@@ -70,11 +70,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Añadir botones
     public void iniciarPartida(Niveles nivel){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+
 
         GridLayout gridLayout =  (GridLayout) findViewById(R.id.gridLay);
-        RelativeLayout r = (RelativeLayout) findViewById(R.id.layout_principal);
+     //   RelativeLayout r = (RelativeLayout) findViewById(R.id.layout_principal);
         Button boton;
-
+        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
+        param.setMargins(0, 0, 0, 0);
         gridLayout.setRowCount(nivel.getFilas());
         gridLayout.setColumnCount(nivel.getFilas());
 
@@ -82,14 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         celda = new int [nivel.getFilas()][nivel.getFilas()];
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-        param.setMargins(0, 0, 0, 0);
 
         for (int i = 0; i < casillas; i++) {
             boton = new Button(this);
@@ -142,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void cambiarGato(){
         Dialog personaje = new Dialog(this);
-        personaje.setContentView(R.layout.spinnerpersonajes);
+        setContentView(R.layout.spinnerpersonajes);
+       personaje.setContentView(R.layout.spinnerpersonajes);
         personaje.setTitle("Personaje gatuno");
         Spinner spin = personaje.findViewById(R.id.spin_gatos);
         AdaptadorPersonalizado adaptadorPersonalizado = new AdaptadorPersonalizado(this, personajesArray);

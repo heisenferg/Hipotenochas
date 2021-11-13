@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Gato"
+        android:layout_height="44dp"
+        android:text="@string/gato"
         android:id="@+id/nombreGato"
-        android:gravity="center"
         android:textSize="50px"
-        android:textAllCaps="true"
-        />
+        android:textAllCaps="true"/>
 
     <Spinner
         android:id="@+id/spin_gatos"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        />
-</RelativeLayout>
+        android:layout_height="120dp"/>
+</LinearLayout>
