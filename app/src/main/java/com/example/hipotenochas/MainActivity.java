@@ -4,6 +4,7 @@ import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.app.Person;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final int HIPOTENOCHA=-1;
     public static final int NOHIPOTENOCHA=0;
-   Niveles nivel = new nFacil();
+
    private int [][] celda;
    private final ArrayList<Personajes> personajesArray = new ArrayList<>();
    private Personajes personajeElegido;
@@ -39,22 +40,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /* Desde aquí
+        // Personajes
+        Personajes gato1 =new Personajes("Gato Dubitativo",
+                ContextCompat.getDrawable(this, R.drawable.gato));
+        Personajes gato2 = new Personajes("Gato engadado",
+                ContextCompat.getDrawable(this, R.drawable.gato2));
+        Personajes gato3 = new Personajes("Gato triste",
+                ContextCompat.getDrawable(this, R.drawable.gato3));
+        personajesArray.add(gato1);
+        personajesArray.add(gato2);
+        personajesArray.add(gato3);
+        personajeElegido=gato1;
 
-        Personajes personaje = new Personajes();
-
-        Spinner listaSpinner = (Spinner) findViewById(R.id.personajes);
-        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, Collections.singletonList(personaje.getNombre()));
-        adaptador.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item);
-
-        listaSpinner.setAdapter(adaptador);
-        listaSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-
-
-      /Hasta aquí*/
-
+        Niveles nivel = new nFacil();
 
 
         if (nivel.getNivel()==0){
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                personaje.dismiss();
             }
         });
  }
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.personajes:
                 cambiarGato();
-                Toast.makeText(getApplicationContext(), "Cambiando personaje...", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Cambiando personaje...", Toast.LENGTH_LONG).show();
 
                 return true;
             case R.id.instrucciones:

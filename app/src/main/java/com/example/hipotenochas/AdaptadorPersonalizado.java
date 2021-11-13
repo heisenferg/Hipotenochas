@@ -28,8 +28,8 @@ public class AdaptadorPersonalizado extends BaseAdapter {
         this.context = context;
     }
 
-    ArrayList<Personajes> personajes;
-    Context context;
+    private ArrayList<Personajes> personajes;
+    private Context context;
 
     public AdaptadorPersonalizado(Context context, ArrayList<Personajes> personajes) {
         setContext(context);
@@ -63,7 +63,7 @@ public class AdaptadorPersonalizado extends BaseAdapter {
         TextView nombre = item.findViewById(R.id.personajes);
         nombre.setText(personajes.get(i).getNombre());
 
-        ImageView imagen = item.findViewById(R.id.spin_gatos);
+        ImageView imagen = item.findViewById(R.id.gatoPersonaje);
         imagen.setImageDrawable(personajes.get(i).getImagenes());
 
         return item;
