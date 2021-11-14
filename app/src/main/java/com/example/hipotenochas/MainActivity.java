@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import android.widget.Toast;
@@ -25,12 +23,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity<relleno> extends AppCompatActivity implements View.OnClickListener{
 
     public static final int HIPOTENOCHA=-1;
     public static final int NOHIPOTENOCHA=0;
 
-   private int [][] celda;
+
    private final ArrayList<Personajes> personajesArray = new ArrayList<>();
    private Personajes personajeElegido;
     Niveles nivel = new nFacil();
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Personajes
         Personajes gato1 =new Personajes("Gato Dubitativo",
                 ContextCompat.getDrawable(this, R.drawable.gato));
@@ -69,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Añadir botones
+    private celda[][] celda;
+
+    // Añadir botones
     public void iniciarPartida(Niveles nivel){
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -76,10 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int width = size.x;
         int height = size.y;
 
-
-
         GridLayout gridLayout =  (GridLayout) findViewById(R.id.gridLay);
-     //   RelativeLayout r = (RelativeLayout) findViewById(R.id.layout_principal);
         Button boton;
         GridLayout.LayoutParams param = new GridLayout.LayoutParams();
         param.setMargins(0, 0, 0, 0);
@@ -88,18 +85,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int casillas = nivel.getFilas()* nivel.getFilas();
 
-        celda = new int [nivel.getFilas()][nivel.getFilas()];
-
+      //  celda = new int [nivel.getFilas()][nivel.getFilas()];
+rellenarCeldas relleno = new rellenarCeldas();
 
         for (int i = 0; i < casillas; i++) {
-            boton = new Button(this);
-            boton.setLayoutParams(new ViewGroup.LayoutParams(
-                    gridLayout.getLayoutParams().width/nivel.getFilas(),
-                    gridLayout.getLayoutParams().height/nivel.getFilas()));
+            for (int j = 0; j < nivel.getFilas(); j++) {
+                boton = new Button(this);
+                boton.setLayoutParams(new ViewGroup.LayoutParams(
+                        gridLayout.getLayoutParams().width/nivel.getFilas(),
+                        gridLayout.getLayoutParams().height/nivel.getFilas()));
 
-            boton.setId(View.generateViewId());
-            boton.setOnClickListener(this);
-            gridLayout.addView(boton,i);
+                boton.setId(View.generateViewId());
+                boton.setOnClickListener(this);
+                gridLayout.addView(boton,i);
+            }
         }
 
         for (int i=0; i< gridLayout.getChildCount(); i++){
@@ -127,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 */
+
+
+
+
     //Respuesta
     @Override
     public void onClick(View v) {
