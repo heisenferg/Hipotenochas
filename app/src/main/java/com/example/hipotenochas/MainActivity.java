@@ -14,8 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import android.widget.Toast;
@@ -52,22 +52,83 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
 
         if (nivel.getNivel()==0){
-            iniciarPartida(new nFacil());
-         //   Recorrer();
+           iniciarPartida(new nFacil());
+
         } else if (nivel.getNivel()==1){
             iniciarPartida(new nMedio());
-          //  Recorrer();
+
         } else if (nivel.getNivel()==2){
             iniciarPartida(new nDificil());
-          //  Recorrer();
+
         }
 
 
     }
 
     // Añadir botones
-    private celda[][] celda;
+    private Tablero tablero;
+    private Celdas[][] celda;
+    private int hipotenochasRestantes;
 
+    public void iniciarPartida(Niveles nivel) {
+
+        tablero = new Tablero(nivel);
+        celda = crearPartida(nivel);
+        this.hipotenochasRestantes = nivel.getHipotenochas();
+    }
+
+    public Celdas[][] crearPartida(Niveles nivel) {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        GridLayout grid = findViewById(R.id.gridLay);
+        // Ponemos pantalla borrada para el botón iniciar partida
+        grid.removeAllViews();
+        grid.setColumnCount(nivel.getFilas());
+        grid.setRowCount(nivel.getFilas());
+        celda = new Celdas[nivel.getFilas()][nivel.getFilas()];
+
+
+        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
+        param.setMargins(0, 0, 0, 0);
+        param.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        param.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        float desnidad = getResources().getDisplayMetrics().density;
+        float dpPx = (int) (50 * desnidad + 0.55f);
+        height -= dpPx;
+
+        LinearLayout.LayoutParams layoutParams = new
+                LinearLayout.LayoutParams(width / nivel.getFilas(), height / nivel.getFilas());
+        layoutParams.setMargins(0, 0, 0, 0);
+
+
+        for (int i = 0; i < nivel.getFilas(); i++) {
+            for (int j = 0; j < nivel.getFilas(); j++) {
+                celda[i][j] = new Celdas(this, j, i, (byte) tablero.getCeldas()[i][j]);
+                Celdas casilla = celda[i][j];
+                casilla.setLayoutParams(layoutParams);
+                casilla.setPulsada(false);
+                casilla.setText(String.valueOf(tablero.getCeldas()[i][j]));
+                casilla.setPadding(0, 0, 0, 0);
+                celda[i][j].setBackgroundColor(Color.BLACK);
+                casilla.setTextColor(Color.BLACK);
+                casilla.setOnClickListener(this);
+             //   casilla.setOnLongClickListener(this);
+                grid.addView(casilla);
+
+            }
+        }
+
+        return celda;
+    }
+
+
+
+
+/*
     // Añadir botones
     public void iniciarPartida(Niveles nivel){
         Display display = getWindowManager().getDefaultDisplay();
@@ -111,33 +172,16 @@ rellenarCeldas relleno = new rellenarCeldas();
         }
 
     }
-/*
-    public void Recorrer(){
-        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLay);
-        Button boton;
 
-        for (int i=0; i< gridLayout.getChildCount(); i++){
-            View v;
-            v= gridLayout.getChildAt(i);
-            if (v.getClass().getSimpleName().equals("Button")) {
-                boton = (Button) v;
-                boton.setBackgroundColor(Color.rgb(255,0,0));
-            }
-        }
-    }
 */
-
-
 
 
     //Respuesta
     @Override
     public void onClick(View v) {
-        if (v.getClass().getSimpleName().equals("Button")){
-            Button boton = (Button) v;
-            boton.setBackgroundColor(Color.rgb(0,255,0));
+        Celdas boton= (Celdas) v;
+        boton.setBackgroundColor(Color.RED);
 
-        }
     }
 
 
@@ -187,6 +231,7 @@ rellenarCeldas relleno = new rellenarCeldas();
             case R.id.comenzarJuego:
                 Toast.makeText(getApplicationContext(), R.string.toastcomenzar,
                         Toast.LENGTH_LONG).show();
+
                 iniciarPartida(nivel);
                 return true;
                 //Recorrer();
