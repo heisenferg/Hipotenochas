@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     tools:context=".MainActivity" >
 
-    <item android:id="@+id/seleccion"
+    <item android:id="@+id/seleccionGato"
         android:title="@string/Cambio_de_personaje"
         android:orderInCategory="100"
         android:icon="@drawable/gato"

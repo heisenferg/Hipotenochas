@@ -117,16 +117,16 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         for (int i = 0; i < nivel.getFilas(); i++) {
             for (int j = 0; j < nivel.getFilas(); j++) {
                 celda[i][j] = new Celdas(this, j, (byte) tablero.getCeldas()[i][j]);
-                Celdas casilla = celda[i][j];
-                casilla.setLayoutParams(layoutParams);
-                casilla.setPulsada(false);
-                casilla.setText(String.valueOf(tablero.getCeldas()[i][j]));
-                casilla.setPadding(0, 0, 0, 0);
-                celda[i][j].setBackgroundColor(Color.BLACK);
-                casilla.setTextColor(Color.BLACK);
-                casilla.setOnClickListener(this);
-             //   casilla.setOnLongClickListener(this);
-                grid.addView(casilla);
+                Celdas celda = this.celda[i][j];
+                celda.setLayoutParams(layoutParams);
+                celda.setPulsada(false);
+                celda.setText(String.valueOf(tablero.getCeldas()[i][j]));
+                celda.setPadding(0, 0, 0, 0);
+                this.celda[i][j].setBackgroundColor(Color.BLACK);
+                celda.setTextColor(Color.BLACK);
+                celda.setOnClickListener(this);
+             //   celda.setOnLongClickListener(this);
+                grid.addView(celda);
 
             }
         }
@@ -136,70 +136,27 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
 
 
-
-/*
-    // Añadir botones
-    public void iniciarPartida(Niveles nivel){
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        GridLayout gridLayout =  (GridLayout) findViewById(R.id.gridLay);
-        Button boton;
-        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-        param.setMargins(0, 0, 0, 0);
-        gridLayout.setRowCount(nivel.getFilas());
-        gridLayout.setColumnCount(nivel.getFilas());
-
-        int casillas = nivel.getFilas()* nivel.getFilas();
-
-      //  celda = new int [nivel.getFilas()][nivel.getFilas()];
-rellenarCeldas relleno = new rellenarCeldas();
-
-        for (int i = 0; i < casillas; i++) {
-            for (int j = 0; j < nivel.getFilas(); j++) {
-                boton = new Button(this);
-                boton.setLayoutParams(new ViewGroup.LayoutParams(
-                        gridLayout.getLayoutParams().width/nivel.getFilas(),
-                        gridLayout.getLayoutParams().height/nivel.getFilas()));
-
-                boton.setId(View.generateViewId());
-                boton.setOnClickListener(this);
-                gridLayout.addView(boton,i);
-            }
-        }
-
-        for (int i=0; i< gridLayout.getChildCount(); i++){
-            View v;
-            v= gridLayout.getChildAt(i);
-            if (v.getClass().getSimpleName().equals("Button")) {
-                boton = (Button) v;
-                boton.setBackgroundColor(Color.rgb(255,0,0));
-            }
-        }
-
-    }
-
-*/
-
-
     //Respuesta
     @Override
     public void onClick(View v) {
         Celdas boton= (Celdas) v;
         boton.setBackgroundColor(Color.RED);
+        for (int i=0; i<nivel.getFilas();i++){
+            for (int j=0; j<nivel.getFilas(); j++){
+                if (celda[i][j].equals(HIPOTENOCHA)){
+                    boton.setBackgroundColor(Color.GREEN);
+                }
+            }
+        }
+
 
     }
 
 
-
-
     public void cambiarGato(){
         Dialog personaje = new Dialog(this);
-        setContentView(R.layout.spinnerpersonajes);
-       personaje.setContentView(R.layout.spinnerpersonajes);
+
+        personaje.setContentView(R.layout.spinnerpersonajes);
         personaje.setTitle("Personaje gatuno");
         Spinner spin = personaje.findViewById(R.id.spin_gatos);
         AdaptadorPersonalizado adaptadorPersonalizado = new AdaptadorPersonalizado(this, personajesArray);
@@ -230,7 +187,7 @@ rellenarCeldas relleno = new rellenarCeldas();
         int id = item.getItemId();
         Instrucciones instrucciones = new Instrucciones();
         switch (id){
-            case R.id.seleccion:
+            case R.id.seleccionGato:
                 cambiarGato();
                 Toast.makeText(getApplicationContext(), R.string.cambioPersonaje, Toast.LENGTH_LONG).show();
                 return true;

@@ -60,7 +60,7 @@ public class AdaptadorPersonalizado extends BaseAdapter {
 
         if (item == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            item = inflater.inflate(R.layout.spinnerpersonajes, null);
+            item = inflater.inflate(R.layout.personajes, null);
         }
 
         TextView nombre = item.findViewById(R.id.nombrePersonaje);
