@@ -26,7 +26,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class MainActivity<relleno> extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     public static final int HIPOTENOCHA=-1;
     public static final int NOHIPOTENOCHA=0;
@@ -126,7 +126,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
                 celda.setTextColor(Color.WHITE);
                 celda.setBackgroundResource(R.drawable.boton);
                 celda.setOnClickListener(this);
-             //   celda.setOnLongClickListener(this);
+                celda.setOnLongClickListener(this);
                 grid.addView(celda);
 
             }
@@ -226,9 +226,9 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
     public void instrucciones() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Instrucciones");
+        builder.setTitle(R.string.tituloInstrucicnes);
         builder.setMessage(R.string.textInstruc);
-        builder.setNegativeButton("Cerrar instrucciones", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.instrucciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
@@ -243,11 +243,14 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
     @Override
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
+        //Registramos en un int el valor de la celda clickada
 
-        if (boton.equals((HIPOTENOCHA))){
+
+        if (boton.getText().equals(HIPOTENOCHA)){
             boton.setBackground(personajeElegido.getImagenes());
             Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
-            return true;
+        } else {
+            Toast.makeText(this, "Has perdido", LENGTH_SHORT).show();
         }
         return false;
     }

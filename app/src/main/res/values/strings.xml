@@ -13,4 +13,6 @@ correctamente todas las hipotenochas o pulsa sobre una.</string>
     <string name="gato">gato</string>
     <string name="lost">Has perdido</string>
     <string name="encontrada">Hipotenocha encontrada!</string>
+    <string name="instrucciones">Cerrar instrucciones</string>
+    <string name="tituloInstrucicnes">Instrucciones</string>
 </resources>
