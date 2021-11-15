@@ -16,19 +16,19 @@ public class Tablero {
 
     public static int sumaraAlrededores(int posColumna, int posFila, int [][] celdas){
         int suma=0;
-        for (int i=posColumna-1; i<=posColumna+1; i++){
-            for (int j=posFila-1; j<=posFila+1; j++){
+      int columnaAnterior= posColumna-1,columnaPosterior=posColumna+1;
+      int filaAnterior=posFila-1, filaPosterior=posFila+1;
+        for (int i=columnaAnterior; i<=columnaPosterior; i++){
+            for (int j=filaAnterior; j<=filaPosterior; j++){
 
                 try {
                     if (celdas[i][j] == HIPOTENOCHA) {
                         suma++;
                     }
-                } catch (ArrayIndexOutOfBoundsException e)
-                {
+                } catch (Exception e){
                 }
             }
         }
-
         return suma;
     }
 
