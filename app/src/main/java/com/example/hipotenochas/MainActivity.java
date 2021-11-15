@@ -1,4 +1,6 @@
 package com.example.hipotenochas;
+import static android.widget.Toast.LENGTH_LONG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -84,7 +86,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
         tablero = new Tablero(nivel);
         celda = crearPartida(nivel);
-        this.hipotenochasRestantes = nivel.getHipotenochas();
+      //  this.hipotenochasRestantes = nivel.getHipotenochas();
     }
 
     public Celdas[][] crearPartida(Niveles nivel) {
@@ -142,24 +144,31 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         Celdas boton= (Celdas) v;
         boton.setBackgroundColor(Color.RED);
-        for (int i=0; i<nivel.getFilas();i++){
-            for (int j=0; j<nivel.getFilas(); j++){
+
                 if (boton.getText().equals(String.valueOf(HIPOTENOCHA))){
                     boton.setBackground(personajeElegido.getImagenes());
-                }
-            }
+                    Toast.makeText(this, R.string.lost, LENGTH_LONG).show();
+                    partidaAcabada();
+
+
         }
 
+    }
+
+    public void partidaAcabada() {
+        for (int i=0; i< celda.length; i++){
+            for (int j=0; j<celda[i].length; j++){
+                celda[i][j].setEnabled(false);
+            }
+        }
 
     }
 
 
     public void cambiarGato(){
-        Dialog personaje = new Dialog(this);
-
-        personaje.setContentView(R.layout.spinnerpersonajes);
-        personaje.setTitle("Personaje gatuno");
-        Spinner spin = personaje.findViewById(R.id.spin_gatos);
+        Dialog gato = new Dialog(this);
+        gato.setContentView(R.layout.spinnerpersonajes);
+        Spinner spin = gato.findViewById(R.id.spin_gatos);
         AdaptadorPersonalizado adaptadorPersonalizado = new AdaptadorPersonalizado(this, personajesArray);
         spin.setAdapter(adaptadorPersonalizado);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -170,11 +179,10 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                personaje.dismiss();
             }
 
         });
-        personaje.show();
+        gato.show();
     }
 
     @Override
@@ -190,21 +198,21 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         switch (id){
             case R.id.seleccionGato:
                 cambiarGato();
-                Toast.makeText(getApplicationContext(), R.string.cambioPersonaje, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.cambioPersonaje, LENGTH_LONG).show();
                 return true;
             case R.id.instrucciones:
                 instrucciones();
                 return true;
             case R.id.comenzarJuego:
                 Toast.makeText(getApplicationContext(), R.string.toastcomenzar,
-                        Toast.LENGTH_LONG).show();
+                        LENGTH_LONG).show();
 
                 iniciarPartida(nivel);
                 return true;
                 //Recorrer();
             case R.id.configurar:
                 Toast.makeText(getApplicationContext(), R.string.confi,
-                        Toast.LENGTH_LONG).show();
+                        LENGTH_LONG).show();
 
                 return true;
         }
