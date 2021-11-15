@@ -3,7 +3,7 @@
     <string name="Cambio_de_personaje">Cambio de personaje</string>
     <string name="Instrucciones">Instrucciones</string>
     <string name="Comenzar_juego">Comenzar juego</string>
-    <string name="Configurar">Configurar</string>
+    <string name="Configurar">Selector de dificultad</string>
     <string name="textInstruc">CONDICIÓN DE VICTORIA: El usuario gana cuando ha despejado todo el tablero y ha marcado
 correctamente todas las hipotenochas.\nCONDICIÓN DE DERROTA: El usuario pierde cuando ha ocurrido no ha marcado
 correctamente todas las hipotenochas o pulsa sobre una.</string>
@@ -12,4 +12,5 @@ correctamente todas las hipotenochas o pulsa sobre una.</string>
     <string name="confi">Configuración de dificultad</string>
     <string name="gato">gato</string>
     <string name="lost">Has perdido</string>
+    <string name="encontrada">Hipotenocha encontrada!</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.hipotenochas;
 import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.LENGTH_SHORT;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -9,7 +10,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
@@ -26,13 +26,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class MainActivity<relleno> extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity<relleno> extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     public static final int HIPOTENOCHA=-1;
     public static final int NOHIPOTENOCHA=0;
 
 
-   private final ArrayList<Personajes> personajesArray = new ArrayList<Personajes>();
+
+    private final ArrayList<Personajes> personajesArray = new ArrayList<Personajes>();
    private Personajes personajeElegido;
     Niveles nivel = new nFacil();
 
@@ -70,16 +71,9 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
 
 
-
-
     private Tablero tablero;
     private Celdas[][] celda;
-    private int hipotenochasRestantes;
-
-
-
-
-
+    private int hipotenochasRestantes=nivel.getHipotenochas();
 
 
     public void iniciarPartida(Niveles nivel) {
@@ -97,7 +91,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         int height = size.y;
 
         GridLayout grid = findViewById(R.id.gridLay);
-        // Borramos todo para el botón iniciar partida
+        // Borramos todo para el botón iniciar partida no deje guardado la anterior.
         grid.removeAllViews();
         grid.setColumnCount(nivel.getFilas());
         grid.setRowCount(nivel.getFilas());
@@ -113,20 +107,24 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         height = (int) (height- dpPx);
 
         LinearLayout.LayoutParams layoutParams = new
-                LinearLayout.LayoutParams(width / nivel.getFilas(), height / nivel.getFilas());
+        LinearLayout.LayoutParams(width / nivel.getFilas(), height / nivel.getFilas());
         layoutParams.setMargins(0, 0, 0, 0);
 
 
+        /*
+         Pintamos el tablero. getFilas lo utilizo siempre tanto para
+         filas como para columnas, porque en todos los niveles, es el
+         mismo entero al ser cuadrado.
+         */
         for (int i = 0; i < nivel.getFilas(); i++) {
             for (int j = 0; j < nivel.getFilas(); j++) {
                 celda[i][j] = new Celdas(this, j, (byte) tablero.getCeldas()[i][j]);
                 Celdas celda = this.celda[i][j];
                 celda.setLayoutParams(layoutParams);
-                celda.setPulsada(false);
                 celda.setText(String.valueOf(tablero.getCeldas()[i][j]));
                 celda.setPadding(0, 0, 0, 0);
-                this.celda[i][j].setBackgroundColor(Color.BLACK);
-                celda.setTextColor(Color.BLACK);
+                celda.setTextColor(Color.WHITE);
+                celda.setBackgroundResource(R.drawable.boton);
                 celda.setOnClickListener(this);
              //   celda.setOnLongClickListener(this);
                 grid.addView(celda);
@@ -139,23 +137,29 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
 
 
-    //Respuesta
+    //Al clickar
     @Override
     public void onClick(View v) {
         Celdas boton= (Celdas) v;
-        boton.setBackgroundColor(Color.RED);
+        boton.setBackgroundColor(Color.TRANSPARENT);
 
                 if (boton.getText().equals(String.valueOf(HIPOTENOCHA))){
+                    // Le borramos el texto para que no interfiera en la imagen
+                    boton.setText("");
                     boton.setBackground(personajeElegido.getImagenes());
                     Toast.makeText(this, R.string.lost, LENGTH_LONG).show();
                     partidaAcabada();
 
 
-        }
+        } else {
+                boton.setBackgroundResource(R.drawable.boton2);
+                }
 
     }
 
+
     public void partidaAcabada() {
+        //Para finalizar, bloqueamos todos las celdas.
         for (int i=0; i< celda.length; i++){
             for (int j=0; j<celda[i].length; j++){
                 celda[i][j].setEnabled(false);
@@ -206,10 +210,8 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
             case R.id.comenzarJuego:
                 Toast.makeText(getApplicationContext(), R.string.toastcomenzar,
                         LENGTH_LONG).show();
-
                 iniciarPartida(nivel);
                 return true;
-                //Recorrer();
             case R.id.configurar:
                 Toast.makeText(getApplicationContext(), R.string.confi,
                         LENGTH_LONG).show();
@@ -237,5 +239,16 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
     }
 
 
+    // Click larga pulsación
+    @Override
+    public boolean onLongClick(View v) {
+        Celdas boton= (Celdas) v;
 
+        if (boton.equals((HIPOTENOCHA))){
+            boton.setBackground(personajeElegido.getImagenes());
+            Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
 }
