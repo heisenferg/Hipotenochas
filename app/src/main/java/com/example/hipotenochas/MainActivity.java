@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
@@ -143,8 +144,8 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         boton.setBackgroundColor(Color.RED);
         for (int i=0; i<nivel.getFilas();i++){
             for (int j=0; j<nivel.getFilas(); j++){
-                if (celda[i][j].equals(HIPOTENOCHA)){
-                    boton.setBackgroundColor(Color.GREEN);
+                if (boton.getText().equals(String.valueOf(HIPOTENOCHA))){
+                    boton.setBackground(personajeElegido.getImagenes());
                 }
             }
         }
