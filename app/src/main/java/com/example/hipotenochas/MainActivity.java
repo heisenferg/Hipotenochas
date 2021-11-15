@@ -243,8 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
-        //Registramos en un int el valor de la celda clickada
-
 
         if (boton.getText().equals(HIPOTENOCHA)){
             boton.setBackground(personajeElegido.getImagenes());
