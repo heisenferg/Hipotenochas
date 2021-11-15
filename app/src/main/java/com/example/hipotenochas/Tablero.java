@@ -1,6 +1,7 @@
 package com.example.hipotenochas;
 
 import static com.example.hipotenochas.MainActivity.HIPOTENOCHA;
+import static com.example.hipotenochas.MainActivity.NOHIPOTENOCHA;
 
 import java.util.Random;
 
@@ -8,72 +9,71 @@ public class Tablero {
 
     private final int[][] celdas;
 
-    public Tablero(int[][] casillas) {
+    public Tablero(int[][] celdas) {
 
-        this.celdas = casillas;
+        this.celdas = celdas;
     }
 
-    public Tablero(Niveles nivel) {
-        celdas = crearTablero(nivel).getCeldas();
-        for (int i = 0; i < celdas.length; i++) {
-            for (int j = 0; j < celdas[i].length; j++) {
+    public static int sumaraAlrededores(int posColumna, int posFila, int [][] celdas){
+        int suma=0;
+        for (int i=posColumna-1; i<=posColumna+1; i++){
+            for (int j=posFila-1; j<=posFila+1; j++){
 
-                int valor = celdas[i][j];
-            /*    if (valor != ) {
-                    casillas[i][j] = contarHipotenochasAlrededor(casillas, i, j);
-                }*/
-            }
-        }
-    }
-/*
-    public static int contarHipotenochasAlrededor(int[][] casillas, int celdaX, int celdaY) {
-        int totalHipotenochas = 0;
-        for (int i = celdaX - 1; i <= celdaX + 1; i++) {
-            for (int j = celdaY - 1; j <= celdaY + 1; j++) {
                 try {
-                    if (casillas[i][j] == NOHIPOTENOCHA) {
-                        totalHipotenochas++;
+                    if (celdas[i][j] == HIPOTENOCHA) {
+                        suma++;
                     }
-                } catch (ArrayIndexOutOfBoundsException ignored) {
+                } catch (ArrayIndexOutOfBoundsException e)
+                {
                 }
             }
         }
-        return totalHipotenochas;
+
+        return suma;
     }
-*/
+
+    public Tablero(Niveles nivel) {
+       celdas = crearTablero(nivel).getCeldas();
+        for (int i = 0; i < celdas.length; i++) {
+            for (int j = 0; j < celdas[i].length; j++) {
+
+                int suma = celdas[i][j];
+
+                if(suma==NOHIPOTENOCHA){
+                    celdas[i][j] = sumaraAlrededores(i, j, celdas);
+                }
+
+            }
+        }
+
+
+    }
+
     public int[][] getCeldas() {
         return celdas;
     }
 
     public Tablero crearTablero(Niveles nivel) {
         int[][] casillas = new int[nivel.getFilas()][nivel.getFilas()];
-        int hipotenochasTotales = 0;
-        for (int i = 0; i < nivel.getFilas(); i++) {
-            int maxHipotenochasFila = nivel.getHipotenochas() / nivel.getFilas();
-            int hipotenochasCreadas = 0;
-            int numeroRandom = getRandomNumber(0, nivel.getFilas() - 1);
-            for (int j = 0; j < nivel.getFilas(); j++) {
-                casillas[i][j] = 0;
-                if (hipotenochasTotales < nivel.getHipotenochas()
-                        && hipotenochasCreadas < maxHipotenochasFila
-                        && j == numeroRandom) {
-                    casillas[i][j] = HIPOTENOCHA;
-                    hipotenochasTotales++;
-                    hipotenochasCreadas++;
-                } else {
-                    casillas[i][j] = 0;
-                }
+        int suma = 0;
+        Random aleatorio = new Random();
+        Tablero tablero = new Tablero(casillas);
 
+        // Bucle para poner a 0 las casillas
+        for (int i=0; i<nivel.getFilas(); i++){
+            for (int j=0; j<nivel.getFilas(); j++){
+                casillas[i][j]=NOHIPOTENOCHA;
+           }
+        }
+        // Bucle para poner -1 en filas y columnas ramdom siempre que no haya más que las del nivel y no la haya ya.
+        for (int k = 0; k<= nivel.getHipotenochas();k++){
+            int filaRandom = aleatorio.nextInt(nivel.getFilas()-1);
+            int columnaRandom = aleatorio.nextInt(nivel.getFilas()-1);
+            if (suma < nivel.getHipotenochas() && casillas[filaRandom][columnaRandom] != HIPOTENOCHA){
+                casillas[filaRandom][columnaRandom] = HIPOTENOCHA;
+                suma++;
             }
         }
-        Tablero tablero = new Tablero(casillas);
-/*
-        while (hipotenochasTotales < nivel.getHipotenochas()) {
-            asignarHipotenochas(tablero.getCasillas(), getRandomNumber(0, nivel.getFilas() - 1),
-                    getRandomNumber(0, nivel.getFilas() - 1));
-            hipotenochasTotales++;
-        }
-*/
         return tablero;
     }
 /*
@@ -89,8 +89,5 @@ public class Tablero {
         }
     }
 */
-    private int getRandomNumber(int min, int max) {
-        Random random = new Random();
-        return random.nextInt(max - min) + min;
-    }
+
 }

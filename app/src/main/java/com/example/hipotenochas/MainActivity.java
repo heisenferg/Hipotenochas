@@ -29,7 +29,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
     public static final int NOHIPOTENOCHA=0;
 
 
-   private final ArrayList<Personajes> personajesArray = new ArrayList<>();
+   private final ArrayList<Personajes> personajesArray = new ArrayList<Personajes>();
    private Personajes personajeElegido;
     Niveles nivel = new nFacil();
 
@@ -40,7 +40,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         // Personajes
         Personajes gato1 =new Personajes("Gato Dubitativo",
                 ContextCompat.getDrawable(this, R.drawable.gato));
-        Personajes gato2 = new Personajes("Gato engadado",
+        Personajes gato2 = new Personajes("Gato enfadado",
                 ContextCompat.getDrawable(this, R.drawable.gato2));
         Personajes gato3 = new Personajes("Gato triste",
                 ContextCompat.getDrawable(this, R.drawable.gato3));
@@ -65,10 +65,19 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
     }
 
-    // Añadir botones
+
+
+
+
     private Tablero tablero;
     private Celdas[][] celda;
     private int hipotenochasRestantes;
+
+
+
+
+
+
 
     public void iniciarPartida(Niveles nivel) {
 
@@ -85,7 +94,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         int height = size.y;
 
         GridLayout grid = findViewById(R.id.gridLay);
-        // Ponemos pantalla borrada para el botón iniciar partida
+        // Borramos todo para el botón iniciar partida
         grid.removeAllViews();
         grid.setColumnCount(nivel.getFilas());
         grid.setRowCount(nivel.getFilas());
@@ -96,9 +105,9 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
         param.setMargins(0, 0, 0, 0);
         param.height = ViewGroup.LayoutParams.MATCH_PARENT;
         param.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        float desnidad = getResources().getDisplayMetrics().density;
-        float dpPx = (int) (50 * desnidad + 0.55f);
-        height -= dpPx;
+        float densidad = getResources().getDisplayMetrics().density;
+        float dpPx = (int) (50 * densidad + 0.4f);
+        height = (int) (height- dpPx);
 
         LinearLayout.LayoutParams layoutParams = new
                 LinearLayout.LayoutParams(width / nivel.getFilas(), height / nivel.getFilas());
@@ -107,7 +116,7 @@ public class MainActivity<relleno> extends AppCompatActivity implements View.OnC
 
         for (int i = 0; i < nivel.getFilas(); i++) {
             for (int j = 0; j < nivel.getFilas(); j++) {
-                celda[i][j] = new Celdas(this, j, i, (byte) tablero.getCeldas()[i][j]);
+                celda[i][j] = new Celdas(this, j, (byte) tablero.getCeldas()[i][j]);
                 Celdas casilla = celda[i][j];
                 casilla.setLayoutParams(layoutParams);
                 casilla.setPulsada(false);
