@@ -31,18 +31,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final int HIPOTENOCHA=-1;
     public static final int NOHIPOTENOCHA=0;
-
-
-
     private final ArrayList<Personajes> personajesArray = new ArrayList<Personajes>();
-   private Personajes personajeElegido;
+    private Personajes personajeElegido;
     Niveles nivel = new nFacil();
+    int cuenta=nivel.getHipotenochas();
+    private Tablero tablero;
+    private Celdas[][] celda;
+    private int hipotenochasRestantes=nivel.getHipotenochas();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Personajes
+
+        // Cargamos los personajes en el array
         Personajes gato1 =new Personajes("Gato Dubitativo",
                 ContextCompat.getDrawable(this, R.drawable.gato));
         Personajes gato2 = new Personajes("Gato enfadado",
@@ -54,28 +57,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         personajesArray.add(gato3);
         personajeElegido=gato1;
 
+        //Iniciamos partida en modo fácil
         iniciarPartida(new nFacil());
-
-
-
 
     }
 
-    int cuenta=nivel.getHipotenochas();
 
 
-    private Tablero tablero;
-    private Celdas[][] celda;
-    private int hipotenochasRestantes=nivel.getHipotenochas();
-
-
+    // Iniciar partida inciiando tablero y celda; Poner cuenta en número de hipotenochas del nivel para onLongClick
     public void iniciarPartida(Niveles nivel) {
-
         tablero = new Tablero(nivel);
         celda = crearPartida(nivel);
         cuenta=nivel.getHipotenochas();
     }
 
+
+    //Crear partida, Grid y bucle for para pintar las celdas
     public Celdas[][] crearPartida(Niveles nivel) {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -84,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int height = size.y;
 
         GridLayout grid = findViewById(R.id.gridLay);
-        // Borramos todo para el botón iniciar partida no deje guardado la anterior.
+        // Borramos  para el botón iniciar partida no deje guardado la anterior.
         grid.removeAllViews();
         grid.setColumnCount(nivel.getFilas());
         grid.setRowCount(nivel.getFilas());
@@ -130,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    //Al clickar
+    // Click simple
     @Override
     public void onClick(View v) {
         Celdas boton= (Celdas) v;
@@ -143,13 +140,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, R.string.loser, LENGTH_LONG).show();
                     partidaAcabada();
                 }else {
-
                     boton.setBackgroundResource(R.drawable.boton2);
                 }
 
     }
 
 
+    // Para finalizar las partidas
     public void partidaAcabada() {
         //Para finalizar, bloqueamos todos las celdas.
         for (int i=0; i< celda.length; i++){
@@ -157,10 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 celda[i][j].setEnabled(false);
             }
         }
-
     }
 
-
+    // Cambio de personaje
     public void cambiarGato(){
         Dialog gato = new Dialog(this);
         gato.setContentView(R.layout.spinnerpersonajes);
@@ -181,12 +177,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gato.show();
     }
 
+
+    // MENÚ
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.mimenu, menu);
         return true;
     }
 
+    // SELECCIONES DE MENÚ
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -211,6 +210,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.nivelFacil:
                 iniciarPartida(new nFacil());
                 Toast.makeText(getApplicationContext(), R.string.nivelFacil, LENGTH_SHORT).show();
+                return true;
+            case R.id.nivelMedio:
+                iniciarPartida(new nMedio());
+                Toast.makeText(getApplicationContext(), R.string.nivelMedio, LENGTH_SHORT).show();
+                return true;
+            case R.id.nivelDificil:
+                iniciarPartida(new nDificil());
+                Toast.makeText(getApplicationContext(), R.string.nivelDificil, LENGTH_SHORT).show();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -219,7 +227,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     // Instrucciones de juego
-
     public void instrucciones() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.tituloInstrucicnes);
@@ -240,9 +247,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
 
+        // Cuenta es el número de hipotenochas de cada nivel.
         if (cuenta==0){
             Toast.makeText(this, R.string.Winner, LENGTH_SHORT).show();
             partidaAcabada();
+            cuenta=nivel.getHipotenochas();
         } else if (cuenta>0){
 
             if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {

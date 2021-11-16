@@ -37,9 +37,6 @@
                 <item android:id="@+id/nivelDificil"
                     android:title="@string/nivelDificil"
                     android:orderInCategory="2" />
-                <item android:id="@+id/PedAnulados"
-                    android:title="Ver Pedidos Anulados"
-                    android:orderInCategory="2" />
             </group>
         </menu>
     </item>
