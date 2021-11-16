@@ -38,18 +38,28 @@ public class Tablero {
         int columnaAnterior= posColumna-1,columnaPosterior=posColumna+1;
         int filaAnterior=posFila-1, filaPosterior=posFila+1;
 
-        for (int i=columnaAnterior; i<=columnaPosterior; i++){
-            for (int j=filaAnterior; j<=filaPosterior; j++){
-                Celdas[][] celda= new Celdas [i][j];
-                try {
-                    if (celdas[i][j] == 0) {
-                        celda[i][j].setBackgroundResource(R.drawable.boton2);
+        for (int k=0; k<posColumna; k++){
+            for (int h=0; h < posFila; h++){
+                if (celdas[k][h]==0){
+                    for (int i=columnaAnterior; i<=columnaPosterior; i++){
+                        for (int j=filaAnterior; j<=filaPosterior; j++){
+                            Celdas[][] celda= new Celdas [i][j];
+                            try {
+                                if (celdas[i][j] == 0) {
+                                    celda[i][j].setBackgroundResource(R.drawable.boton2);
+                                }
+                            } catch (Exception e){
+                            }
+                        }
                     }
-                } catch (Exception e){
                 }
+
+
             }
         }
+
     }
+
 
 
 
