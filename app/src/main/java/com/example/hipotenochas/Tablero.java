@@ -68,10 +68,10 @@ public class Tablero {
         for (int k = 0; k<= nivel.getHipotenochas();k++){
             int filaRandom = aleatorio.nextInt(nivel.getFilas()-1);
             int columnaRandom = aleatorio.nextInt(nivel.getFilas()-1);
-            if (suma < nivel.getHipotenochas() && celdas[filaRandom][columnaRandom] != HIPOTENOCHA){
-                celdas[filaRandom][columnaRandom] = HIPOTENOCHA;
-                suma++;
-            }
+                if (suma < nivel.getHipotenochas() && celdas[filaRandom][columnaRandom] != HIPOTENOCHA){
+                    celdas[filaRandom][columnaRandom] = HIPOTENOCHA;
+                    suma++;
+                }
         }
         return tablero;
     }

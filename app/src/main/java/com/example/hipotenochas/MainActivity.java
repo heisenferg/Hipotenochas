@@ -151,10 +151,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, R.string.loser, LENGTH_LONG).show();
                     partidaAcabada();
 
-
-        } else {
-                boton.setBackgroundResource(R.drawable.boton2);
-                }
+                } else {
+                        boton.setBackgroundResource(R.drawable.boton2);
+                        }
 
     }
 
@@ -245,7 +244,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
-    //    boton.setOnClickListener(null);
 
         if (cuenta==0){
             Toast.makeText(this, R.string.Winner, LENGTH_SHORT).show();
