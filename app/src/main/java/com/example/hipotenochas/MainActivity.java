@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boton.setBackgroundColor(Color.TRANSPARENT);
 
                 if (boton.getText().equals(String.valueOf(HIPOTENOCHA))){
-                    // Le borramos el texto para que no interfiera en la imagen
+                    // Le borramos el texto para que no interfiera con la imagen
                     boton.setText("");
                     boton.setBackground(personajeElegido.getImagenes());
                     Toast.makeText(this, R.string.lost, LENGTH_LONG).show();
@@ -240,17 +240,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    int cuenta=2;
     // Click larga pulsación
     @Override
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
+        boton.setOnClickListener(null);
 
-        if (boton.getText().equals(HIPOTENOCHA)){
+        if (cuenta==0){
+            Toast.makeText(this, R.string.Winner, LENGTH_SHORT).show();
             boton.setBackground(personajeElegido.getImagenes());
-            Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
+            partidaAcabada();
         } else {
-            Toast.makeText(this, "Has perdido", LENGTH_SHORT).show();
+            do {
+                if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
+                    boton.setBackground(personajeElegido.getImagenes());
+                    Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
+                    cuenta = cuenta - 1;
+
+                } else if (boton.getText().equals(String.valueOf(NOHIPOTENOCHA))) {
+                    Toast.makeText(this, R.string.loser, LENGTH_SHORT).show();
+                    partidaAcabada();
+                }
+            } while (cuenta != 0);
+
         }
+
         return false;
     }
 }

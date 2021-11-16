@@ -15,4 +15,6 @@ correctamente todas las hipotenochas o pulsa sobre una.</string>
     <string name="encontrada">Hipotenocha encontrada!</string>
     <string name="instrucciones">Cerrar instrucciones</string>
     <string name="tituloInstrucicnes">Instrucciones</string>
+    <string name="Winner">¡¡¡Has ganado!!!!</string>
+    <string name="loser">Lo siento, has perdido....</string>
 </resources>
