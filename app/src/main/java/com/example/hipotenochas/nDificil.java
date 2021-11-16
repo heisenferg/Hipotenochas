@@ -11,8 +11,4 @@ public class nDificil extends Niveles{
         return nDificil.HIPOTENOCHAS;
     }
 
-    @Override
-    public int getNivel() {
-        return nDificil.NIVEL;
-    }
 }

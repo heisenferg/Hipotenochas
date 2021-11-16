@@ -11,8 +11,4 @@ public class nMedio extends Niveles{
         return nMedio.HIPOTENOCHAS;
     }
 
-    @Override
-    public int getNivel() {
-        return nMedio.NIVEL;
-    }
 }
