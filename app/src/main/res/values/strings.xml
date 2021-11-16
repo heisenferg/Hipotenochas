@@ -17,4 +17,7 @@ correctamente todas las hipotenochas o pulsa sobre una.</string>
     <string name="tituloInstrucicnes">Instrucciones</string>
     <string name="Winner">¡¡¡Has ganado!!!!</string>
     <string name="loser">Lo siento, has perdido....</string>
+    <string name="nivelDificil">Jugar en modo profesional</string>
+    <string name="nivelFacil">Jugar modo fácil</string>
+    <string name="nivelMedio">Jugar en modo medio</string>
 </resources>

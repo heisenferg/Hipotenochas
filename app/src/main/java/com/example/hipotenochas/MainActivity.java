@@ -54,22 +54,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         personajesArray.add(gato3);
         personajeElegido=gato1;
 
+        iniciarPartida(new nFacil());
 
 
-        if (nivel.getNivel()==0){
-           iniciarPartida(new nFacil());
-
-        } else if (nivel.getNivel()==1){
-            iniciarPartida(new nMedio());
-
-        } else if (nivel.getNivel()==2){
-            iniciarPartida(new nDificil());
-
-        }
 
 
     }
 
+    int cuenta=nivel.getHipotenochas();
 
 
     private Tablero tablero;
@@ -81,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tablero = new Tablero(nivel);
         celda = crearPartida(nivel);
-      //  this.hipotenochasRestantes = nivel.getHipotenochas();
+        cuenta=nivel.getHipotenochas();
     }
 
     public Celdas[][] crearPartida(Niveles nivel) {
@@ -144,16 +136,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Celdas boton= (Celdas) v;
         boton.setBackgroundColor(Color.TRANSPARENT);
 
-                if (boton.getText().equals(String.valueOf(HIPOTENOCHA))){
+                if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
                     // Le borramos el texto para que no interfiera con la imagen
                     boton.setText("");
                     boton.setBackground(personajeElegido.getImagenes());
                     Toast.makeText(this, R.string.loser, LENGTH_LONG).show();
                     partidaAcabada();
+                }else {
 
-                } else {
-                        boton.setBackgroundResource(R.drawable.boton2);
-                        }
+                    boton.setBackgroundResource(R.drawable.boton2);
+                }
 
     }
 
@@ -215,14 +207,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.configurar:
                 Toast.makeText(getApplicationContext(), R.string.confi,
                         LENGTH_LONG).show();
-
                 return true;
+            case R.id.nivelFacil:
+                iniciarPartida(new nFacil());
+                Toast.makeText(getApplicationContext(), R.string.nivelFacil, LENGTH_SHORT).show();
         }
-
 
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    // Instrucciones de juego
 
     public void instrucciones() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -239,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    int cuenta=nivel.getHipotenochas();
     // Click larga pulsación
     @Override
     public boolean onLongClick(View v) {
@@ -252,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
                 boton.setOnClickListener(null);
+                boton.setText("");
                 boton.setBackground(personajeElegido.getImagenes());
                 Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
                 cuenta = cuenta - 1;
@@ -263,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 boton.setBackgroundColor(Color.TRANSPARENT);
                 boton.setBackgroundResource(R.drawable.b);
                 partidaAcabada();
+                cuenta=nivel.getHipotenochas();
             }
         }
 

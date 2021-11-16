@@ -33,6 +33,26 @@ public class Tablero {
         return suma;
     }
 
+    public void limpiarTablero(int posColumna, int posFila, int [][] celdas){
+
+        int columnaAnterior= posColumna-1,columnaPosterior=posColumna+1;
+        int filaAnterior=posFila-1, filaPosterior=posFila+1;
+
+        for (int i=columnaAnterior; i<=columnaPosterior; i++){
+            for (int j=filaAnterior; j<=filaPosterior; j++){
+                Celdas[][] celda= new Celdas [i][j];
+                try {
+                    if (celdas[i][j] == 0) {
+                        celda[i][j].setBackgroundResource(R.drawable.boton2);
+                    }
+                } catch (Exception e){
+                }
+            }
+        }
+    }
+
+
+
     public Tablero(Niveles nivel) {
        celdas = generarTablero(nivel).getCeldas();
         for (int i = 0; i < celdas.length; i++) {
@@ -43,7 +63,6 @@ public class Tablero {
                 if(suma==NOHIPOTENOCHA){
                     celdas[i][j] = sumaraAlrededores(i, j, celdas);
                 }
-
             }
         }
     }
@@ -75,5 +94,7 @@ public class Tablero {
         }
         return tablero;
     }
+
+
 
 }
