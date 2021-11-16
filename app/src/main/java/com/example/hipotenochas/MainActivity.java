@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // Le borramos el texto para que no interfiera con la imagen
                     boton.setText("");
                     boton.setBackground(personajeElegido.getImagenes());
-                    Toast.makeText(this, R.string.lost, LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.loser, LENGTH_LONG).show();
                     partidaAcabada();
 
 
@@ -240,32 +240,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    int cuenta=2;
+    int cuenta=nivel.getHipotenochas();
     // Click larga pulsación
     @Override
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
-        boton.setOnClickListener(null);
+    //    boton.setOnClickListener(null);
 
         if (cuenta==0){
             Toast.makeText(this, R.string.Winner, LENGTH_SHORT).show();
-            boton.setBackground(personajeElegido.getImagenes());
             partidaAcabada();
-        } else {
-            do {
-                if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
-                    boton.setBackground(personajeElegido.getImagenes());
-                    Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
-                    cuenta = cuenta - 1;
+        } else if (cuenta>0){
 
-                } else if (boton.getText().equals(String.valueOf(NOHIPOTENOCHA))) {
-                    Toast.makeText(this, R.string.loser, LENGTH_SHORT).show();
-                    partidaAcabada();
-                }
-            } while (cuenta != 0);
+            if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
+                boton.setOnClickListener(null);
+                boton.setBackground(personajeElegido.getImagenes());
+                Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
+                cuenta = cuenta - 1;
 
+            } else if (!boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
+                boton.setOnClickListener(null);
+                Toast.makeText(this, R.string.loser, LENGTH_LONG).show();
+                boton.setText("");
+                boton.setBackgroundColor(Color.TRANSPARENT);
+                boton.setBackgroundResource(R.drawable.b);
+                partidaAcabada();
+            }
         }
 
         return false;
+
     }
 }
