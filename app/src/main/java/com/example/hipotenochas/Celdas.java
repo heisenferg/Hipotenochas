@@ -9,14 +9,12 @@ public class Celdas extends androidx.appcompat.widget.AppCompatButton {
     public Celdas(Context context, int fila) {
         super(context);
         this.fila = fila;
-
-     //   this.siHipotenocha = siHipotenocha;
     }
-    public Celdas(Context context, int fila, byte siHipotenocha) {
+
+
+    public Celdas(Context context, int fila, int celda) {
         super(context);
         this.fila = fila;
-
-
     }
 
     public int getFila() {

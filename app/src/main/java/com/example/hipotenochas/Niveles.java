@@ -5,7 +5,7 @@ public abstract class Niveles {
     //Clase nivel fácil
     public static final class nFacil {
         public static final int FILAS=8;
-        public static final int HIPOTENOCHAS=10;
+        public static final int HIPOTENOCHAS=2;
         public static final int NIVEL=0;
     }
 

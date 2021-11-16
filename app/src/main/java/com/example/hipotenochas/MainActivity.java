@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final ArrayList<Personajes> personajesArray = new ArrayList<Personajes>();
     private Personajes personajeElegido;
     Niveles nivel = new nFacil();
-    int cuenta=nivel.getHipotenochas();
+
     private Tablero tablero;
     private Celdas[][] celda;
     private int hipotenochasRestantes=nivel.getHipotenochas();
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
+    int cuenta=nivel.getHipotenochas();
 
     // Iniciar partida inciiando tablero y celda; Poner cuenta en número de hipotenochas del nivel para onLongClick
     public void iniciarPartida(Niveles nivel) {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
         for (int i = 0; i < nivel.getFilas(); i++) {
             for (int j = 0; j < nivel.getFilas(); j++) {
-                celda[i][j] = new Celdas(this, j, (byte) tablero.getCeldas()[i][j]);
+                celda[i][j] = new Celdas(this, j, tablero.getCeldas()[i][j]);
                 Celdas celda = this.celda[i][j];
                 celda.setLayoutParams(layoutParams);
                 celda.setText(String.valueOf(tablero.getCeldas()[i][j]));
@@ -247,12 +247,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onLongClick(View v) {
         Celdas boton= (Celdas) v;
 
-        // Cuenta es el número de hipotenochas de cada nivel.
-        if (cuenta==0){
-            Toast.makeText(this, R.string.Winner, LENGTH_SHORT).show();
-            partidaAcabada();
-            cuenta=nivel.getHipotenochas();
-        } else if (cuenta>0){
+
+         if (cuenta>0){
 
             if (boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
                 boton.setOnClickListener(null);
@@ -260,6 +256,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 boton.setBackground(personajeElegido.getImagenes());
                 Toast.makeText(this, R.string.encontrada, LENGTH_SHORT).show();
                 cuenta = cuenta - 1;
+                // Cuenta es el número de hipotenochas de cada nivel.
+                if (cuenta==0){
+                    Toast.makeText(this, R.string.Winner, LENGTH_SHORT).show();
+                    partidaAcabada();
+                    cuenta=nivel.getHipotenochas();}
 
             } else if (!boton.getText().equals(String.valueOf(HIPOTENOCHA))) {
                 boton.setOnClickListener(null);
